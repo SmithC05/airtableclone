@@ -1,0 +1,100 @@
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0B1C42; 
+}
+.signup-box {
+  width: 400px;
+  max-width: 90%;
+  padding: 30px;
+  background-color: #0B1C42;
+  border-radius: 10px;
+  
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.signup-box h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.signup-box h2:hover {
+  color: #ffcc00;
+  transition: color 0.3s ease-in-out;
+  text-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  background-color: #0f2a5c;
+  color: white;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ffcc00;
+  box-shadow: 0 0 4px rgba(255, 204, 0, 0.8);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffcc00;
+  color: #0B1C42;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #64FFDA;
+  transform: scale(1.02);
+
+}
+
+button:active {
+  background-color: #ffb300;
+  transform: scale(0.98);
+}
+
+
+/* Already have an account */
+.login-text {
+  color: white;
+  font-size: 14px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.login-text a {
+  color: yellow;
+  text-decoration: none;
+}
+
+.login-text a:hover {
+  color: #64FFDA;
+}
