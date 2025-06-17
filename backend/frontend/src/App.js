@@ -9,7 +9,7 @@ function App() {
   return (
    <Router>
          
-                      <nav>
+            <nav>
              <div className="nav-logo">
               <Link to="/signup">Air Table</Link></div>
              <ul>
