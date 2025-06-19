@@ -4,17 +4,15 @@ const express = require('express');
 
 
 exports.createTable = catchAsyncErrors(async (req, res, next) => {
-    const { name, description, columns } = req.body;
-
-    if (!name || !description || !columns || columns.length === 0) {
-        return res.status(400).json({ message: 'Please provide all required fields' });
+    const { name, fields } = req.body;
+    if (!name || !fields || !Array.isArray(fields)) {
+        return res.status(400).json({ message: 'Name and fields are required' });
     }
 
     const newTable = await table.create({
         name,
-        description,
-        columns,
-        owner: req.user.id 
+        createdBy: req.user._id,
+        fields
     });
 
     res.status(201).json({
@@ -24,23 +22,25 @@ exports.createTable = catchAsyncErrors(async (req, res, next) => {
     });
 });
 exports.getAllTables = catchAsyncErrors(async (req, res, next) => {
-    const tables = await table.find({ owner: req.user._id }).populate('owner', 'name email');
-
+    const tables = await table.find({ createdBy: req.user._id }).populate('createdBy', 'name email');
+    
     res.status(200).json({
         success: true,
         tables
     });
 });
-
 exports.updateTable = catchAsyncErrors(async (req, res, next) => {
-    const tableId = req.params.id;
-    const { name, description, columns } = req.body;
+    const { id } = req.params;
+    const { name, fields } = req.body;
 
-    const updatedTable = await table.findByIdAndUpdate(
-        tableId,
-        { name, description, columns },
-        { new: true, runValidators: true }
-    );
+    if (!name || !fields || !Array.isArray(fields)) {
+        return res.status(400).json({ message: 'Name and fields are required' });
+    }
+
+    const updatedTable = await table.findByIdAndUpdate(id, {
+        name,
+        fields
+    }, { new: true });
 
     if (!updatedTable) {
         return res.status(404).json({ message: 'Table not found' });
@@ -53,9 +53,9 @@ exports.updateTable = catchAsyncErrors(async (req, res, next) => {
     });
 });
 exports.deleteTable = catchAsyncErrors(async (req, res, next) => {
-    const tableId = req.params.id;
+    const { id } = req.params;
 
-    const deletedTable = await table.findByIdAndDelete(tableId);
+    const deletedTable = await table.findByIdAndDelete(id);
 
     if (!deletedTable) {
         return res.status(404).json({ message: 'Table not found' });
@@ -66,4 +66,3 @@ exports.deleteTable = catchAsyncErrors(async (req, res, next) => {
         message: 'Table deleted successfully'
     });
 });
-

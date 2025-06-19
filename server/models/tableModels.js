@@ -1,45 +1,28 @@
 const {config} =require('dotenv');
 const mongoose = require('mongoose');
-const validator = require('validator');
+
+
+const fieldSchema = new mongoose.Schema({
+  name: String,
+  type: {
+    type: String,
+    enum: ['text', 'number', 'date', 'dropdown', 'checkbox', 'email', 'phone', 'url', 'rating', 'currency'],
+  },
+  options: [String], 
+  required: Boolean,
+});
+
 const tableSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, 'Please enter the table name'],
+  name: String,
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
-  description: {
-    type: String,
-    required: [true, 'Please enter the table description'],
-  },
-  columns: [
-    {
-      name: {
-        type: String,
-        required: [true, 'Column name is required'],
-      },
-      dataType: {
-        type: String,
-        required: [true, 'Data type is required'],
-        enum: ['String', 'Number', 'Date', 'Boolean'],
-      },
-      owner: {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: 'User',
-         required: true,
-        },
-      isPrimaryKey: {
-        type: Boolean,
-        default: false,
-      },
-      isNullable: {
-        type: Boolean,
-        default: true,
-      },
-    },
-  ],
+  fields: [fieldSchema],
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
-const Table = mongoose.model('Table', tableSchema);
-module.exports = Table;
+
+module.exports = mongoose.model('Table', tableSchema);
