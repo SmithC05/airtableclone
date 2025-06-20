@@ -4,25 +4,19 @@ import './App.css';
 import Home from './home';
 import Login from './login';  
 import Signup from './signup';
+import Dashboard from './dashboard';
+import ProtectedRoute from './protectedroutes';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 function App() {
   return (
    <Router>
-         
-            <nav>
-             <div className="nav-logo">
-              <Link to="/signup">Air Table</Link></div>
-             <ul>
-               <li><Link to="/">Home</Link></li>
-               <li><Link to="/login">Login</Link></li>
-               <li><Link to="/signup">Sign Up</Link></li>
-             </ul>
-           </nav>
-          
            <Routes>
              <Route path="/" element={<Home />} />
              <Route path="/login" element={<Login />} />
              <Route path="/signup" element={<Signup />} />
+             <Route path="/dashboard" element={  <ProtectedRoute> <Dashboard /></ProtectedRoute>    } />
+             <Route path="/profile" element={<div>Profile Placeholder</div>} />
+             <Route path="/logout" element={<div>Logout Placeholder</div>} />
    
            </Routes>
          

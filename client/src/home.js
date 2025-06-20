@@ -9,7 +9,15 @@ function Home() {
   return (
     
     <div>
-          
+          <nav>
+             <div className="nav-logo">
+              <Link to="/signup">Air Table</Link></div>
+             <ul>
+               <li><Link to="/">Home</Link></li>
+               <li><Link to="/login">Login</Link></li>
+               <li><Link to="/signup">Sign Up</Link></li>
+             </ul>
+           </nav>
 
 
       {/* Hero Section */}
