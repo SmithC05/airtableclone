@@ -25,10 +25,7 @@ const tableSchema = new mongoose.Schema({
     required: true,
   },
   fields: [fieldSchema],
-   rows: {
-    type: [[String]], 
-    default: [],
-  },
+   
 }, { timestamps: true });
 
 tableSchema.index({ name: 1, createdBy: 1 }, { unique: true });

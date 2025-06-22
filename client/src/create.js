@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,Link} from 'react-router-dom';
 import axios from 'axios';
 import './create.css';
 
@@ -114,6 +114,7 @@ function CreatePage() {
 
   return (
     <div className="create-page">
+      <Link to="/dashboard" className="go-dashboard">🏠 Go to Dashboard</Link>
       <h2>Create New Table</h2>
 
       <input

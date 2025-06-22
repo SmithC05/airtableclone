@@ -1,11 +1,10 @@
-
 .dashboard-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 80px 20px;
   background: #f5f7fa;
-  min-height: calc(100vh - 70px); /* account for navbar */
+  min-height: calc(100vh - 70px); /* Adjust if navbar exists */
   box-sizing: border-box;
 }
 
@@ -14,7 +13,7 @@
   padding: 40px 30px;
   border-radius: 16px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
+  max-width: 1000px;
   width: 100%;
   text-align: center;
 }
@@ -30,6 +29,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 40px;
 }
 
 .dashboard-btn {
@@ -53,4 +53,84 @@
 
 .logout-btn:hover {
   background-color: #e84141;
+}
+
+/* Table Grid Styles */
+.tables-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.dashboard-grid-wrapper {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.table-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease-in-out;
+}
+
+.table-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.table-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 16px;
+  word-break: break-word;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-btn {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.view-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  padding: 8px 14px;
+  background-color: #ef476f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-btn:hover {
+  background-color: #d62839;
 }

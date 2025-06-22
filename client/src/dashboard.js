@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './dashboard.css';
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
   const [tables, setTables] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/v1/tables", {
@@ -15,6 +16,19 @@ function Dashboard() {
       console.error("Error fetching tables:", err);
     });
   }, []);
+
+  const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this table?")) return;
+
+    axios.delete(`http://localhost:8000/api/v1/tables/${id}`, {
+      withCredentials: true
+    }).then(() => {
+      setTables(prev => prev.filter(t => t._id !== id));
+    }).catch(err => {
+      alert("❌ Failed to delete table");
+      console.error(err);
+    });
+  };
 
   return (
     <div className="dashboard-container">
@@ -27,18 +41,29 @@ function Dashboard() {
           <Link to="/logout" className="dashboard-btn logout-btn">🚪 Logout</Link>
         </div>
 
-        <div className="table-list">
-          <h3>Your Tables 📋</h3>
+        <div className="dashboard-grid-wrapper">
+          <h3 className="tables-heading">Your Tables 📋</h3>
           {tables.length === 0 ? (
             <p>No tables created yet.</p>
           ) : (
-            <ul>
+            <div className="dashboard-grid">
               {tables.map((table) => (
-                <li key={table._id}>
-                  <Link to={`/tables/${table._id}`}>{table.name}</Link>
-                </li>
+                <div key={table._id} className="table-card">
+                  <div className="table-name">{table.name}</div>
+                  <div className="card-actions">
+                    <Link to={`/tables/${table._id}`} className="view-btn">
+                      View
+                    </Link>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(table._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           )}
         </div>
       </div>
