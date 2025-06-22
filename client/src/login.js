@@ -30,12 +30,14 @@ function Login() {
       });
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
       navigate("/dashboard");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed 😓");
     }
   };
-
+  
   return (
     <div className="login-container">
       <div className="login-box">
@@ -72,6 +74,7 @@ function Login() {
         </p>
       </div>
     </div>
+    
   );
 }
 export default Login;

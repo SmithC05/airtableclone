@@ -1,0 +1,26 @@
+.create-page {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  font-family: 'Segoe UI';
+}
+
+.create-page input, select {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.field-box {
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #f9f9f9;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+}

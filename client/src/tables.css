@@ -1,0 +1,63 @@
+.table-view-container {
+  padding: 2rem;
+}
+
+.table-title {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-actions {
+  margin-bottom: 1rem;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 5px 12px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-edit {
+  background-color: #ffd166;
+}
+
+.btn-delete {
+  background-color: #ef476f;
+  color: white;
+}
+.table-nav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.btn-dashboard {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.btn-dashboard:hover {
+  background-color: #0056b3;
+}

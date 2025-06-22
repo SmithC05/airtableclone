@@ -1,28 +1,54 @@
-const {config} =require('dotenv');
 const mongoose = require('mongoose');
-
-
 const fieldSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, "Field name is required"],
+    trim: true,
+  },
   type: {
     type: String,
     enum: ['text', 'number', 'date', 'dropdown', 'checkbox', 'email', 'phone', 'url', 'rating', 'currency'],
+    required: true,
   },
-  options: [String], 
-  required: Boolean,
+  options: [String],
+  isRequired: Boolean,
 });
-
 const tableSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: [true, "Table name is required"],
+    trim: true,
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
   fields: [fieldSchema],
-  createdAt: {
-    type: Date,
-    default: Date.now,
+   rows: {
+    type: [[String]], 
+    default: [],
   },
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Table', tableSchema);
+tableSchema.index({ name: 1, createdBy: 1 }, { unique: true });
+
+const rowSchema = new mongoose.Schema({
+  table: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Table',
+    required: true,
+  },
+  data: {
+    type: Map,
+    of: mongoose.Schema.Types.Mixed,
+    required: true,
+  },
+}, { timestamps: true });
+const Table = mongoose.model('Table', tableSchema);
+const Row = mongoose.model('Row', rowSchema);
+
+module.exports = {
+  Table,
+  Row
+};
