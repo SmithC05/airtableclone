@@ -81,8 +81,6 @@ button:active {
   transform: scale(0.98);
 }
 
-
-/* Already have an account */
 .login-text {
   color: white;
   font-size: 14px;

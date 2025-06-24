@@ -4,7 +4,7 @@
   align-items: center;
   padding: 80px 20px;
   background: #f5f7fa;
-  min-height: calc(100vh - 70px); /* Adjust if navbar exists */
+  min-height: calc(100vh - 70px); 
   box-sizing: border-box;
 }
 
