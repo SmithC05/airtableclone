@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./signup.css";
-
 const API_BASE_URL = "http://localhost:8000/api/v1";
-
 function Signup() {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don’t match 😤");
       return;
     }
-
     try {
       const response = await axios.post(`${API_BASE_URL}/register`, {
         name: formData.username,
@@ -36,7 +29,6 @@ function Signup() {
       }, {
         withCredentials: true,
       });
-
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (error) {

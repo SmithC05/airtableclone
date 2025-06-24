@@ -1,10 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './profile.css'; 
 function ProfilePage() {
   const user = JSON.parse(localStorage.getItem("user"));
-
-
   return (
     <div className="page">
         <div className="avatar-circle">{user?.name?.charAt(0)}</div>
@@ -13,8 +10,6 @@ function ProfilePage() {
       <p>✨ You haven’t completed your profile yet.</p>
       <p>💡 Profile features coming soon...</p>
     </div>
-    
   );
 }
-
 export default ProfilePage;

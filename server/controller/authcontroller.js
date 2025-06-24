@@ -1,13 +1,6 @@
 const user = require('../models/userModels');
 const catchAsyncErrors = require('../middleware/catchAsyncErrors');
-const express= require('express');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-
-
 exports.registeruser = catchAsyncErrors(async (req, res, next) => {
-        console.log("Request body received:", req.body);
-
         const { name, email, password, confirmPassword } = req.body;
         const userExists = await user.findOne({ email });
         if (userExists) {

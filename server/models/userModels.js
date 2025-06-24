@@ -1,4 +1,3 @@
-const { config } = require('dotenv');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcrypt');
@@ -14,7 +13,6 @@ const userSchema = new mongoose.Schema({
     unique: true,
     validate: [validator.isEmail, 'Please enter a valid email address'],
     lowercase: true,
-
   },
   password: {
     type: String,
@@ -36,8 +34,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'user',
   },
-  resetpasswordToken: String,
-  resetpasswordTokenexpire: Date,
   createdAt: {
     type: Date,
     default: Date.now,

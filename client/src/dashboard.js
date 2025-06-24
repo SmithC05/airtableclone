@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import './dashboard.css';
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 function Dashboard() {
   const [tables, setTables] = useState([]);
-  const navigate = useNavigate();
-
   useEffect(() => {
     axios.get("http://localhost:8000/api/v1/tables", {
       withCredentials: true
@@ -16,10 +13,8 @@ function Dashboard() {
       console.error("Error fetching tables:", err);
     });
   }, []);
-
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this table?")) return;
-
     axios.delete(`http://localhost:8000/api/v1/tables/${id}`, {
       withCredentials: true
     }).then(() => {
@@ -29,7 +24,6 @@ function Dashboard() {
       console.error(err);
     });
   };
-
   return (
     <div className="dashboard-container">
       <div className="dashboard-box">

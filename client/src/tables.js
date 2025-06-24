@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./tables.css";
-
 function TableViewPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [table, setTable] = useState(null);
   const [newRow, setNewRow] = useState([]);
   const [editRowIndex, setEditRowIndex] = useState(null);
   const [editRowData, setEditRowData] = useState([]);
-
   const fetchTable = async () => {
     try {
       const res = await axios.get(`http://localhost:8000/api/v1/tables/${id}`, {
@@ -23,17 +20,14 @@ function TableViewPage() {
       console.error("Error fetching table:", err);
     }
   };
-
   useEffect(() => {
     fetchTable();
   }, [id]);
-
   const handleRowChange = (index, value) => {
     const updatedRow = [...newRow];
     updatedRow[index] = value;
     setNewRow(updatedRow);
   };
-
   const handleAddRow = async () => {
     try {
       const res = await axios.post(
@@ -48,7 +42,6 @@ function TableViewPage() {
       alert("❌ Error adding row");
     }
   };
-
   const handleEditTable = async () => {
     const newName = prompt("Enter new table name:", table?.name);
     if (!newName || newName.trim() === "" || newName === table.name) return;
@@ -119,12 +112,8 @@ function TableViewPage() {
       alert("❌ Error deleting row");
     }
   };
-
   if (!table) return <p>Loading...</p>;
-
   return (
-   
-
     <div className="table-view-page">
        <div className="table-nav">
   <button onClick={() => navigate("/dashboard")} className="btn-dashboard">
@@ -132,7 +121,6 @@ function TableViewPage() {
   </button>
 </div>
       <h2>{table.name} 📋</h2>
-
       <table className="custom-table">
         <thead>
           <tr>
@@ -142,7 +130,6 @@ function TableViewPage() {
             <th>Actions</th>
           </tr>
         </thead>
-
         <tbody>
           {table.rows && table.rows.length > 0 ? (
             table.rows.map((row, rowIndex) => (
@@ -199,12 +186,10 @@ function TableViewPage() {
         <button onClick={handleEditTable} className="btn-edit">✏️ Edit Table</button>
         <button onClick={handleDeleteTable} className="btn-delete">🗑️ Delete Table</button>
       </div>
-
       <div className="table-footer">
         <p>Total Rows: {table.rows.length}</p>
       </div>
     </div>
   );
 }
-
 export default TableViewPage;

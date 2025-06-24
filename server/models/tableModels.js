@@ -25,6 +25,10 @@ const tableSchema = new mongoose.Schema({
     required: true,
   },
   fields: [fieldSchema],
+  rows: {
+    type: [mongoose.Schema.Types.Mixed],
+    default: [],
+  },
    
 }, { timestamps: true });
 
@@ -41,6 +45,7 @@ const rowSchema = new mongoose.Schema({
     of: mongoose.Schema.Types.Mixed,
     required: true,
   },
+  
 }, { timestamps: true });
 const Table = mongoose.model('Table', tableSchema);
 const Row = mongoose.model('Row', rowSchema);
