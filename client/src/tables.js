@@ -165,20 +165,76 @@ function TableViewPage() {
           )}
 
           <tr>
-            {table.fields.map((field, index) => (
-              <td key={index}>
-                <input
-                  type="text"
-                  placeholder={field.name}
-                  value={newRow[index] || ""}
-                  onChange={(e) => handleRowChange(index, e.target.value)}
-                />
-              </td>
+  {table.fields.map((field, index) => {
+    const typeMap = {
+      phone: "tel",
+      rating: "number",
+      currency: "number",
+      email: "email",
+      url: "url",
+      date: "date",
+      number: "number",
+      text: "text"
+    };
+    const inputType = typeMap[field.type] || "text";
+
+    return (
+      <td key={index}>
+        {field.type === "checkbox" ? (
+          <input
+            type="checkbox"
+            checked={newRow[index] === true}
+            onChange={(e) => handleRowChange(index, e.target.checked)}
+          />
+        ) : field.type === "dropdown" ? (
+          <select
+            value={newRow[index] || ""}
+            onChange={(e) => handleRowChange(index, e.target.value)}
+          >
+            <option value="">-- Select --</option>
+            {field.options.map((opt, i) => (
+              <option key={i} value={opt}>{opt}</option>
             ))}
-            <td>
-              <button onClick={handleAddRow}>➕ Add</button>
-            </td>
-          </tr>
+          </select>
+        ) : field.type === "currency" ? (
+          <div className="currency-input">
+    <span className="currency-symbol">₹</span>
+    <input
+      type="number"
+      placeholder={field.name}
+      value={newRow[index] ?? ""}
+      onChange={(e) => handleRowChange(index, e.target.value)}
+    />
+  </div>
+        ) : field.type === "rating" ? (
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input
+              type="number"
+              min="0"
+              max="10"
+              placeholder={field.name}
+              value={newRow[index] || ""}
+              onChange={(e) => handleRowChange(index, e.target.value)}
+              style={{ width: "100%" }}
+            />
+            <span style={{ marginLeft: "4px" }}>/10</span>
+          </div>
+        ) : (
+          <input
+            type={inputType}
+            placeholder={field.name}
+            value={newRow[index] || ""}
+            onChange={(e) => handleRowChange(index, e.target.value)}
+          />
+        )}
+      </td>
+    );
+  })}
+  <td>
+    <button onClick={handleAddRow}>➕ Add</button>
+  </td>
+</tr>
+
         </tbody>
       </table>
 

@@ -5,12 +5,16 @@ exports.createTable = catchAsyncErrors(async (req, res) => {
     if (!name || !fields || !Array.isArray(fields)) {
         return res.status(400).json({ message: 'Name and fields are required' });
     }
+    const existingTable = await Table.findOne({ name: req.body.name, createdBy: req.user._id });
+if (existingTable) {
+  return res.status(400).json({ message: "A table with this name already exists!" });
+}
     const newTable = await Table.create({
         name,
         createdBy: req.user._id,
         fields
     });
-
+    
     res.status(201).json({
         success: true,
         message: 'Table created successfully',

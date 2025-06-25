@@ -86,9 +86,14 @@ function CreatePage() {
       setErrors([]);
       navigate(`/tables/${tableId}`); 
     } catch (err) {
-      console.error(err);
-      alert("❌ Error creating table");
-    }
+  console.error(err);
+  if (err.response && err.response.status === 400 && err.response.data.message) {
+    alert(`❌ ${err.response.data.message}`);
+  } else {
+    alert("❌ Error creating table. Please try again.");
+  }
+}
+
   };
   return (
     <div className="create-page">
